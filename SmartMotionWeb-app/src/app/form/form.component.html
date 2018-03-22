@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>SmartMotion Web App</h1>
+  <form>
+    <div class="form-group">
+      <label for="Light timeout">Light timeout</label>
+      <input type="number" onfocus="blur()" step = 15 min = 15 max = 60 class="form-control" id="timeout" required
+      [(ngModel)] = "model.timeout" name="timeout">
+    </div>
+
+    <div class="form-group">
+      <label for="Min temp">Minimale Temperatuur</label>
+      <input type="number" onfocus="blur()" min = 10 max = 25 class="form-control" id="mintemp" required
+      [(ngModel)] = "model.mintemp" name="mintemp">
+    </div>
+
+    <div class="form-group">
+      <label for="Max temp">Maximale Temperatuur</label>
+      <input type ="number" onfocus="blur()" min = 10 max = 25 class="form-control" id="maxtemp" required
+      [(ngModel)]="model.maxtemp" name="maxtemp">
+    </div>
+
+    <button (click)='onSubmit()' type="submit" class="btn btn-success">Submit</button>
+
+  </form>
+</div>

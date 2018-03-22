@@ -1,5 +1,7 @@
 import { Component, NgModule } from '@angular/core';
-import {MatSliderModule} from '@angular/material/slider';
+import {MatSliderModule, MatSlider} from '@angular/material/slider';
+
+
 
 @Component({
   selector: 'app-root',
@@ -8,5 +10,7 @@ import {MatSliderModule} from '@angular/material/slider';
 })
 
 export class AppComponent {
-  title = 'app';
+  title = 'app';  
+  
+
 }
