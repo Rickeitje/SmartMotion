@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { Info }    from '../info';
 
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -9,10 +11,23 @@ import { Info }    from '../info';
 })
 export class FormComponent {
 
-  model = new Info(30,18,21);
+  constructor(private http: HttpClient){
+  } 
 
+  utc = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  model = new Info(30,18,21,this.utc);     
+  
   submitted = false;
+  onSubmit() { this.submitted = true; this.sendData(); }
 
-  onSubmit() { this.submitted = true; console.log(JSON.stringify(this.model)); }
- 
+  sendData() {
+    this.http.post('http://192.168.11.25:42069/sendvalues',this.model).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  } 
 }
