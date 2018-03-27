@@ -24,6 +24,74 @@
   </form>
 </div>
 
+<div class = "container"><br/>Settings Log<br/></div>
+
 <div class="container">
-  <h2><p>{{settingslogs}}</p></h2>
+    <cdk-table #table [dataSource] = "dataSource" class = "example-table">
+
+      <ng-container cdkColumnDef="index">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">index</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.index}}</cdk-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="timeout">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">timeout</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.timeout}}</cdk-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="maxtemp">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">maxtemp</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.maxtemp}}</cdk-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="mintemp">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">mintemp</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.mintemp}}</cdk-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="time">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">time</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.time}}</cdk-cell>
+      </ng-container>
+
+
+      <cdk-header-row *cdkHeaderRowDef = "['index','timeout','maxtemp','mintemp','time']" class="example-header-row"></cdk-header-row>
+      <cdk-row *cdkRowDef = "let row; columns: ['index','timeout','maxtemp','mintemp','time']" class="example-row"></cdk-row>
+    </cdk-table>
+</div>
+
+<div class = "container"><br/>Motion Logs<br/></div>
+
+<div class="container">
+    <cdk-table #table [dataSource] = "dataValues" class = "example-table">
+
+      <ng-container cdkColumnDef="index">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">index</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.index}}</cdk-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="on">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">on</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.on}}</cdk-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="temp">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">temp</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.temp}}</cdk-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="time">
+        <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">time</cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="example-cell">{{row.time}}</cdk-cell>
+      </ng-container>
+
+      <cdk-header-row *cdkHeaderRowDef = "['index','on','temp','time']" class="example-header-row"></cdk-header-row>
+      <cdk-row *cdkRowDef = "let row; columns: ['index','on','temp','time']" class="example-row"></cdk-row>
+    </cdk-table>
+</div>
+
+<div style="position: relative;background-color: black, width 600px; height:800px;">
+  <div class = "footnote" style = "position: absolute,bottom 5px;background-color:black">
+  #TeamKansloos™ 2018  
+  </div>
 </div>

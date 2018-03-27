@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-
 import { Info }    from '../info';
+
+import {CdkTableModule} from '@angular/cdk/table'
 
 import { HttpClient } from '@angular/common/http';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { DataSource } from '@angular/cdk/collections';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-form',
@@ -11,16 +15,31 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit{
+  displayedColumns=['index','timeout','maxtemp','mintemp'];
   settingslogs = "";
   jsonresponse;
+  dataSource : null;
+  dataValues : null;
 
   ngOnInit(): void {
     this.http.get('http://192.168.178.234:42069/getsettingslog').subscribe(
       res => {
         this.jsonresponse = res;
         console.log(res);
-        this.parseJson();
+        this.parseTime();
+        this.dataSource = this.jsonresponse.response;
+      },
+      err => {
+        console.log(err);
+      }
+    );
 
+    this.http.get('http://192.168.178.234:42069/getvalues').subscribe(
+      res => {
+        this.jsonresponse = res;
+        console.log(res);
+        this.parseTime();
+        this.dataValues = this.jsonresponse.response;
       },
       err => {
         console.log(err);
@@ -48,13 +67,9 @@ export class FormComponent implements OnInit{
     );
   }
   
-  parseJson(){
+  parseTime(){
     for(var j in this.jsonresponse.response){
-    console.log(j);
-    this.settingslogs += this.jsonresponse.response[j].timeout + ' ';
-    this.settingslogs += this.jsonresponse.response[j].mintemp + ' ';
-    this.settingslogs += this.jsonresponse.response[j].maxtemp + ' ';
-    this.settingslogs += this.jsonresponse.response[j].time.slice(0,19).replace('T',' ')    + '<br/>';
+       this.jsonresponse.response[j].time = this.jsonresponse.response[j].time.slice(0,19).replace('T',' ');
     }
   }
 }
